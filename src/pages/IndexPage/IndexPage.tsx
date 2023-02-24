@@ -1,10 +1,26 @@
 import PageLayout from '../../layout';
 import Typography from '../../components/Typography';
 import Button from '../../components/Button';
+import { Navigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+import { removeUser } from '../../store/reducers/user/UserReducer';
+import useAuth from '../../hooks/useAuth';
 
 import './IndexPapge.scss';
 
 function IndexPage() {
+  const { id } = useAuth()
+  const dispatch = useDispatch();
+
+  const onHandlerLogOut = () => {
+    dispatch(removeUser());
+  }
+
+  if (!id) {
+    return <Navigate to="/" />
+  }
+
   return (
     <PageLayout contentClassName="index-page">
       <Typography
@@ -19,7 +35,7 @@ function IndexPage() {
       >
         Just An Amazing App
       </Typography>
-      <Button>Log out</Button>
+      <Button onClick={onHandlerLogOut}>Log out</Button>
     </PageLayout>
   );
 }
