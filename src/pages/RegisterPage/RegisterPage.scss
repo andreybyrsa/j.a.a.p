@@ -1,12 +1,12 @@
 @import "./src/assets/styles/main";
 
-.login-page {
+.register-page {
   padding: 20px;
 
   @include flexible(center, center, column, $gap: 16px);
 
   &__redirection {
-    @include flexible(center, center, $gap: 6px)
+    @include flexible(center, center, $gap: 6px);
   }
 
   &__redirect-link {

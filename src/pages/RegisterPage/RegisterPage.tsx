@@ -1,30 +1,25 @@
-import {useEffect, useState} from 'react';
+import { useState } from 'react';
 import PageLayout from '../../layout';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import AppLoader from '../../components/Loaders/AppLoader';
 import Typography from '../../components/Typography';
 import { NavLink } from 'react-router-dom';
 
-import './LoginPage.scss'
+import './RegisterPage.scss';
 
-function LoginPage() {
+function RegisterPage() {
+  const [userName, setUserName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2450);
-  }, [])
-
-  if (loading) {
-    return <AppLoader />
-  }
 
   return (
-    <PageLayout contentClassName="login-page">
+    <PageLayout contentClassName="register-page">
+      <Input
+        type="text"
+        value={userName}
+        setValue={setUserName}
+        placeholder="UserName"
+      />
       <Input
         type="email"
         value={email}
@@ -37,23 +32,23 @@ function LoginPage() {
         setValue={setPassword}
         placeholder="Password"
       />
-      <Button>Login</Button>
-      <div className="login-page__redirection">
+      <Button>Sing up</Button>
+      <div className="register-page__redirection">
         <Typography
           variant="text-t2"
           color="#6FBAF8"
         >
-          If you don't have an account
+          Already have an account?
         </Typography>
         <NavLink
-          className="login-page__redirect-link"
-          to="register"
+          className="register-page__redirect-link"
+          to="/"
         >
-          Sign up
+          Just Sign in
         </NavLink>
       </div>
     </PageLayout>
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
