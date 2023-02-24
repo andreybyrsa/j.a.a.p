@@ -1,5 +1,5 @@
 import { RingLoader } from 'react-spinners';
-import PageLayout from '../../layout';
+import PageLayout from '../../../layout';
 
 import './AppLoader.scss'
 
