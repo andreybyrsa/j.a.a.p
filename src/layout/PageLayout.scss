@@ -1,4 +1,4 @@
-@import "../assets/styles/main";
+@import "./src/assets/styles/main";
 
 .page-layout {
   @include position(fixed, 0, 0, 0, 0);
