@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import classNames from 'classnames';
+import Typography from '../Typography';
 
 import './Input.scss';
 import InputProps from './Input.types';
@@ -30,7 +31,15 @@ function Input({
         onChange={onHandlerChange}
         className="input__field"
       />
-      {!value && <p className="input__placeholder">{placeholder}</p>}
+      {!value && (
+        <Typography
+          className="input__placeholder"
+          variant="text-t1"
+          color="#4c81a9"
+        >
+          {placeholder}
+        </Typography>
+      )}
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Typography from '../Typography';
 
 import './Button.scss'
 import ButtonProps from './Button.types';
@@ -20,7 +21,12 @@ function Button({
       onClick={onClick}
       type="button"
     >
-      <p className="button__text">{children}</p>
+      <Typography
+        variant="heading-h3"
+        color="#000000"
+      >
+        {children}
+      </Typography>
     </button>
   );
 }

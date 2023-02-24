@@ -1,0 +1,23 @@
+@import "../../assets/styles/main";
+
+.typography {
+  &-variant--heading-h1 {
+    @include typography(34px, 500, 18px);
+  }
+
+  &-variant--heading-h2 {
+    @include typography(25px, 500, 18px);
+  }
+
+  &-variant--heading-h3 {
+    @include typography(22px, 600, 18px);
+  }
+
+  &-variant--text-t1 {
+    @include typography(18px, 500, 18px);
+  }
+
+  &-variant--texxt-t2 {
+    @include typography(16px, 400, 18px);
+  }
+}

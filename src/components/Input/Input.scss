@@ -18,11 +18,10 @@
     @include border(solid, #6FBAF8, 8px, 2px);
 
     color: #ffffff;
+    @include typography(18px, 500, 18px);
   }
 
   &__placeholder {
     @include position(absolute, $top: 15px, $left: 20px);
-
-    color: #4c81a9;
   }
 }
