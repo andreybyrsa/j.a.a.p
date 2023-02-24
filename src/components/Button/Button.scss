@@ -1,6 +1,8 @@
+@import "../../assets/styles/main";
+
 .button {
   width: 100%;
-  height: 48px;
+  @include fixedHeight(48px);
   background-color: #75E3B2;
   border-radius: 8px;
 
