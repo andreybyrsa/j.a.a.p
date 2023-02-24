@@ -1,0 +1,7 @@
+@import "./src/assets/styles/main";
+
+.login-page {
+  padding: 20px;
+
+  @include flexible(center, center, column, $gap: 8px);
+}

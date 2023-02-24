@@ -9,7 +9,7 @@ function UserLoader({
   user,
 }: UserLoaderProps) {
   const [userName, setUserName] = useState<string>('');
-  const [currentIndex, setCurrentIndex] = useState(-1);
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
 
   useEffect(() => {
     if (currentIndex === -1) {

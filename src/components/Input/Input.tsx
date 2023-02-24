@@ -8,6 +8,8 @@ import InputProps from './Input.types';
 function Input({
   className,
 
+  type = 'text',
+
   value,
   setValue,
 
@@ -27,6 +29,7 @@ function Input({
   return (
     <div className={InputClassName}>
       <input
+        type={type}
         value={value}
         onChange={onHandlerChange}
         className="input__field"
