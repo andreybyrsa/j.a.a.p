@@ -4,7 +4,7 @@
   transition: color .2s ease-out;
 
   &-variant--heading-h1 {
-    @include typography(34px, 500, 18px);
+    @include typography(34px, 500, 40px);
   }
 
   &-variant--heading-h2 {

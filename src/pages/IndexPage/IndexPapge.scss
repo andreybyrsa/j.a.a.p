@@ -1,0 +1,7 @@
+@import "./src/assets/styles/main";
+
+.index-page {
+  padding: 20px;
+
+  @include flexible($fd: column, $gap: 16px)
+}
