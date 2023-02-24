@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import PageLayout from '../../../layout';
 import Typography from '../../Typography';
+import { Navigate } from 'react-router-dom';
 
 import './UserLoader.scss';
 import UserLoaderProps from './UserLoader.types';
@@ -10,6 +11,8 @@ function UserLoader({
 }: UserLoaderProps) {
   const [userName, setUserName] = useState<string>('');
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
+
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     if (currentIndex === -1) {
@@ -24,8 +27,13 @@ function UserLoader({
     }
     if (userName === user) {
       setUserName(prevState => prevState + '!');
+      setRedirect(true);
     }
   }, [currentIndex, user, userName])
+
+  if (redirect) {
+    return <Navigate to="/index" />
+  }
 
   return (
     <PageLayout contentClassName="user-loader">
