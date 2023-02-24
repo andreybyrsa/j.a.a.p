@@ -4,7 +4,13 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import AppLoader from '../../components/Loaders/AppLoader';
 import Typography from '../../components/Typography';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
+
+import { setUser } from '../../store/reducers/user/UserReducer';
+import { useDispatch } from 'react-redux';
+import useAuth from '../../hooks/useAuth';
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import './LoginPage.scss'
 
@@ -13,11 +19,34 @@ function LoginPage() {
   const [password, setPassword] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(true);
 
+  const dispatch = useDispatch()
+
+  const { id } = useAuth()
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2450);
   }, [])
+
+  const onHandlerLogIn = () => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then(({user}) => {
+        dispatch(setUser({
+          name: user.email?.split('@')[0],
+          email: user.email,
+          id: user.uid,
+        }));
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }
+
+  if (id) {
+    return <Navigate to="/index" />
+  }
 
   if (loading) {
     return <AppLoader />
@@ -37,7 +66,7 @@ function LoginPage() {
         setValue={setPassword}
         placeholder="Password"
       />
-      <Button>Login</Button>
+      <Button onClick={onHandlerLogIn}>Login</Button>
       <div className="login-page__redirection">
         <Typography
           variant="text-t2"
