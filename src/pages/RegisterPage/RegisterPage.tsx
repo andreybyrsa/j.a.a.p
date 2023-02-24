@@ -5,12 +5,43 @@ import Button from '../../components/Button';
 import Typography from '../../components/Typography';
 import { NavLink } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../store/reducers/user/UserReducer';
+
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+
+import useAuth from '../../hooks/useAuth';
+
 import './RegisterPage.scss';
+import UserLoader from "../../components/Loaders/UserLoader";
 
 function RegisterPage() {
   const [userName, setUserName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
+  const { name } = useAuth()
+
+  const dispatch = useDispatch();
+
+  const onHandlerRegister = () => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        dispatch(setUser({
+          name: user.email?.split('@')[0],
+          email: user.email,
+          id: user.uid,
+        }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  if (name) {
+    return <UserLoader user={name} />;
+  }
 
   return (
     <PageLayout contentClassName="register-page">
@@ -32,7 +63,7 @@ function RegisterPage() {
         setValue={setPassword}
         placeholder="Password"
       />
-      <Button>Sing up</Button>
+      <Button onClick={onHandlerRegister}>Sing up</Button>
       <div className="register-page__redirection">
         <Typography
           variant="text-t2"
