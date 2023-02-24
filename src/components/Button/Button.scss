@@ -5,4 +5,16 @@
   @include fixedHeight(48px);
   background-color: #75E3B2;
   border-radius: 8px;
+
+  color: #000000;
+
+  transition: all .2s ease-out;
+
+  &:active {
+    background-color: #346753;
+
+    .button__text {
+      color: #75E3B2;
+    }
+  }
 }

@@ -22,8 +22,8 @@ function Button({
       type="button"
     >
       <Typography
+        className="button__text"
         variant="heading-h3"
-        color="#000000"
       >
         {children}
       </Typography>

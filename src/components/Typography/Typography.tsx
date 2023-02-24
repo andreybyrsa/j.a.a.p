@@ -1,3 +1,4 @@
+import React from 'react';
 import classNames from 'classnames';
 
 import './Typography.scss';
@@ -8,18 +9,23 @@ function Typography({
 
   children = 'Текст',
   variant = 'text-t1',
-  color = '#ffffff',
+  color,
 }: TypographyProps) {
   const TypographyClassName = classNames(
     'typography',
     `typography-variant--${variant}`,
     className,
   );
+  const TypographyStyle: React.CSSProperties = {};
+
+  if (color) {
+    TypographyStyle.color = color;
+  }
 
   return (
     <p
       className={TypographyClassName}
-      style={{ color: color }}
+      style={TypographyStyle}
     >
       {children}
     </p>

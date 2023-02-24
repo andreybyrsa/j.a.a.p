@@ -1,6 +1,8 @@
 @import "../../assets/styles/main";
 
 .typography {
+  transition: color .2s ease-out;
+
   &-variant--heading-h1 {
     @include typography(34px, 500, 18px);
   }
