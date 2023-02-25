@@ -27,7 +27,7 @@ function UserLoader({
     }
     if (userName === user) {
       setUserName(prevState => prevState + '!');
-      setRedirect(true);
+      setTimeout(() => setRedirect(true), 1000);
     }
   }, [currentIndex, user, userName])
 

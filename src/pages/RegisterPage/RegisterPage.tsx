@@ -4,6 +4,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Typography from '../../components/Typography';
 import { NavLink } from 'react-router-dom';
+import UserLoader from '../../components/Loaders/UserLoader';
 
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/reducers/user/UserReducer';
@@ -13,7 +14,6 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import useAuth from '../../hooks/useAuth';
 
 import './RegisterPage.scss';
-import UserLoader from "../../components/Loaders/UserLoader";
 
 function RegisterPage() {
   const [userName, setUserName] = useState<string>('')
@@ -29,7 +29,7 @@ function RegisterPage() {
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         dispatch(setUser({
-          name: user.email?.split('@')[0],
+          name: userName,
           email: user.email,
           id: user.uid,
         }));

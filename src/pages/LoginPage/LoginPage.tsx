@@ -4,7 +4,8 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import AppLoader from '../../components/Loaders/AppLoader';
 import Typography from '../../components/Typography';
-import { Navigate, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import UserLoader from '../../components/Loaders/UserLoader';
 
 import { setUser } from '../../store/reducers/user/UserReducer';
 import { useDispatch } from 'react-redux';
@@ -21,7 +22,7 @@ function LoginPage() {
 
   const dispatch = useDispatch()
 
-  const { id } = useAuth()
+  const { name } = useAuth()
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,7 +35,7 @@ function LoginPage() {
     signInWithEmailAndPassword(auth, email, password)
       .then(({user}) => {
         dispatch(setUser({
-          name: user.email?.split('@')[0],
+          name: name,
           email: user.email,
           id: user.uid,
         }));
@@ -44,8 +45,8 @@ function LoginPage() {
       });
   }
 
-  if (id) {
-    return <Navigate to="/index" />
+  if (name) {
+    return <UserLoader user={name} />
   }
 
   if (loading) {
