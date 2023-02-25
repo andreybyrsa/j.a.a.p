@@ -35,7 +35,7 @@ function LoginPage() {
     signInWithEmailAndPassword(auth, email, password)
       .then(({user}) => {
         dispatch(setUser({
-          name: name,
+          name: `${user.email}`.split('@')[0],
           email: user.email,
           id: user.uid,
         }));

@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import User from '../../../domain/User';
 
 import initialState from './InitialState';
 
@@ -6,7 +8,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, action) {
+    setUser(state, action: PayloadAction<User>) {
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.id = action.payload.id;

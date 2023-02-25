@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import PageLayout from '../../../layout';
 import Typography from '../../Typography';
 import { Navigate } from 'react-router-dom';
