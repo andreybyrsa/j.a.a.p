@@ -6,6 +6,7 @@ import AppLoader from '../../components/Loaders/AppLoader';
 import Typography from '../../components/Typography';
 import { NavLink } from 'react-router-dom';
 import UserLoader from '../../components/Loaders/UserLoader';
+import ErrorModal from '../../components/Modals/ErrorModal/ErrorModal';
 
 import { setUser } from '../../store/reducers/user/UserReducer';
 import { useDispatch } from 'react-redux';
@@ -16,9 +17,11 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import './LoginPage.scss'
 
 function LoginPage() {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [error, setError] = useState<string>('');
 
   const dispatch = useDispatch()
 
@@ -41,7 +44,7 @@ function LoginPage() {
         }));
       })
       .catch((error) => {
-        console.log(error)
+        setError(error.message);
       });
   }
 
@@ -55,6 +58,12 @@ function LoginPage() {
 
   return (
     <PageLayout contentClassName="login-page">
+      {error && (
+        <ErrorModal
+          error={error}
+          setError={setError}
+        />
+      )}
       <Input
         type="email"
         value={email}

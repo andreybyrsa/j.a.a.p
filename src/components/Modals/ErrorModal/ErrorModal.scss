@@ -1,0 +1,56 @@
+@import "./src/assets/styles/main";
+
+.error-modal {
+  z-index: 2;
+  @include position(absolute, 0, 0, 0, 0);
+
+  background-color: rgba(#000000, .6);
+
+  &__content {
+    padding: 16px;
+
+    &-wrapper {
+      width: 100%;
+      height: 100%;
+
+      @include flexible(center, center);
+    }
+  }
+
+  &__message {
+    padding: 20px 0;
+    width: 100%;
+    background-color: #0F2234;
+    @include border(solid, #6FBAF8, 8px, 2px);
+
+    @include flexible(center, flex-start, $fd: column, $gap: 16px);
+
+    animation: modalActive .6s ease-out forwards;
+  }
+
+  &--close {
+    animation: modalClose .6s ease-out forwards;
+  }
+
+  @keyframes modalActive {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    to {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  @keyframes modalClose {
+    from {
+      width: 100%;
+      opacity: 1;
+    }
+    to {
+      width: 0;
+      opacity: 0;
+    }
+  }
+}

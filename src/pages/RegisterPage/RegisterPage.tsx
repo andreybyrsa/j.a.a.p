@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import Typography from '../../components/Typography';
 import { NavLink } from 'react-router-dom';
 import UserLoader from '../../components/Loaders/UserLoader';
+import ErrorModal from '../../components/Modals/ErrorModal';
 
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/reducers/user/UserReducer';
@@ -19,6 +20,8 @@ function RegisterPage() {
   const [userName, setUserName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
+  const [error, setError] = useState<string>('');
 
   const { name } = useAuth()
 
@@ -35,7 +38,7 @@ function RegisterPage() {
         }));
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
   }
 
@@ -45,6 +48,12 @@ function RegisterPage() {
 
   return (
     <PageLayout contentClassName="register-page">
+      {error && (
+        <ErrorModal
+          error={error}
+          setError={setError}
+        />
+      )}
       <Input
         type="text"
         value={userName}
