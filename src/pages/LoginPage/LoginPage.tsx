@@ -83,7 +83,7 @@ function LoginPage() {
           variant="text-t2"
           color="#6FBAF8"
         >
-          If you don't have an account
+          Don't have an account?
         </Typography>
         <NavLink
           className="login-page__redirect-link"
