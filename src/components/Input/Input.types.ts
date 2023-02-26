@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React, { FormEventHandler, SetStateAction } from 'react';
 
 interface InputProps {
   className?: string
@@ -7,6 +7,8 @@ interface InputProps {
 
   value?: string
   setValue?:  React.Dispatch<SetStateAction<string>>
+
+  onSubmit?: FormEventHandler<HTMLFormElement>
 
   placeholder?: string
 }

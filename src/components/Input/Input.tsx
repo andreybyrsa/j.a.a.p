@@ -13,6 +13,8 @@ function Input({
   value,
   setValue,
 
+  onSubmit,
+
   placeholder = 'Пример',
 }: InputProps) {
   const InputClassName = classNames(
@@ -27,7 +29,10 @@ function Input({
   }
 
   return (
-    <div className={InputClassName}>
+    <form
+      className={InputClassName}
+      onSubmit={onSubmit}
+    >
       <input
         type={type}
         value={value}
@@ -43,7 +48,7 @@ function Input({
           {placeholder}
         </Typography>
       )}
-    </div>
+    </form>
   )
 }
 

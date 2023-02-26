@@ -3,5 +3,10 @@
 .index-page {
   padding: 20px;
 
-  @include flexible($fd: column, $gap: 16px)
+  @include flexible(center, flex-start, column, $gap: 16px);
+
+  &__footer {
+    padding: 20px;
+    background-color: #04121F;
+  }
 }
