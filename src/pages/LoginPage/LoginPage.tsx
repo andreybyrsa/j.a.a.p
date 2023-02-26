@@ -9,29 +9,30 @@ import UserLoader from '../../components/Loaders/UserLoader';
 import ErrorModal from '../../components/Modals/ErrorModal/ErrorModal';
 
 import { setUser } from '../../store/reducers/user/UserReducer';
-import { useDispatch } from 'react-redux';
+import { removeLoading } from '../../store/reducers/app/AppReducer';
+import { useDispatch, useSelector } from 'react-redux';
 import useAuth from '../../hooks/useAuth';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import './LoginPage.scss'
+import { RootState } from '../../store';
 
 function LoginPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(true);
-
   const [error, setError] = useState<string>('');
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { name } = useAuth()
+  const { name } = useAuth();
+  const { loading } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
+      dispatch(removeLoading());
     }, 2450);
-  }, [])
+  }, []);
 
   const onHandlerLogIn = () => {
     const auth = getAuth();

@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { removeUser } from '../../store/reducers/user/UserReducer';
+import { setLoading } from '../../store/reducers/app/AppReducer';
 import useAuth from '../../hooks/useAuth';
 
 import './IndexPapge.scss';
@@ -15,6 +16,7 @@ function IndexPage() {
 
   const onHandlerLogOut = () => {
     dispatch(removeUser());
+    dispatch(setLoading());
   }
 
   if (!id) {
