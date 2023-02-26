@@ -8,18 +8,22 @@ import TodoProps from './Todo.types';
 function Todo({
   className,
 
+  id,
   value,
+  date,
+
+  onClick,
 }: TodoProps) {
   const TodoClassName = classNames(
     'todo',
     className,
   );
 
-  const date = new Date();
-  const currentDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.toString().split(' ')[4].split(':').filter((elem, index) => index < 2).join(':')}`;
-
   return (
-    <div className={TodoClassName}>
+    <div
+      className={TodoClassName}
+      key={id}
+    >
       <div className="todo__description">
         <Typography
           variant="text-t1"
@@ -31,10 +35,15 @@ function Todo({
           variant="text-t2"
           color="#4c81a9"
         >
-          {currentDate}
+          {date}
         </Typography>
       </div>
-      <Button className="todo__delete-button">Del</Button>
+      <Button
+        className="todo__delete-button"
+        onClick={onClick}
+      >
+        Del
+      </Button>
     </div>
   );
 }

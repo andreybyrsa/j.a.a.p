@@ -5,7 +5,7 @@
   width: 100%;
   min-height: 52px;
   background-color: #0F2234;
-  @include border(solid, #6FBAF8, 0, (1px 0 1px 0));
+  @include border(solid, #6FBAF8, 8px, (1px 0 1px 0));
 
   @include flexible(center, space-between, $gap: 16px);
 
