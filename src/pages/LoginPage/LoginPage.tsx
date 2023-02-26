@@ -32,7 +32,7 @@ function LoginPage() {
     setTimeout(() => {
       dispatch(removeLoading());
     }, 2450);
-  }, []);
+  }, [dispatch]);
 
   const onHandlerLogIn = () => {
     const auth = getAuth();
