@@ -12,6 +12,7 @@ import { setUser } from '../../store/reducers/user/UserReducer';
 import { removeLoading } from '../../store/reducers/app/AppReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import useAuth from '../../hooks/useAuth';
+import { getDatabase, ref, child, get } from 'firebase/database';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -38,11 +39,15 @@ function LoginPage() {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({user}) => {
-        dispatch(setUser({
-          name: `${user.email}`.split('@')[0],
-          email: user.email,
-          id: user.uid,
-        }));
+        console.log(user.uid);
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `user${user.uid}/userName`)).then((data) => {
+          dispatch(setUser({
+            name: data.val().userName,
+            email: user.email,
+            id: user.uid,
+          }));
+        }).catch(error => console.log(error));
       })
       .catch((error) => {
         setError(error.message);

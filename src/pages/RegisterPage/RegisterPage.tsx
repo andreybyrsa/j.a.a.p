@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/reducers/user/UserReducer';
 
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
 
 import useAuth from '../../hooks/useAuth';
 
@@ -36,6 +37,10 @@ function RegisterPage() {
           email: user.email,
           id: user.uid,
         }));
+        const db = getDatabase();
+        set(ref(db, `user${user.uid}/userName`), {
+          userName: userName,
+        });
       })
       .catch((error) => {
         setError(error.message);
