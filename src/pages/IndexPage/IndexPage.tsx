@@ -43,7 +43,7 @@ function IndexPage() {
     dispatch(removeUser());
     dispatch(removeTodos());
     dispatch(setLoading());
-  }, [dispatch])
+  }, [dispatch]);
 
   const header = useMemo(() => {
     return (
