@@ -8,7 +8,6 @@ import TodoProps from './Todo.types';
 function Todo({
   className,
 
-  id,
   value,
   date,
 
@@ -20,10 +19,7 @@ function Todo({
   );
 
   return (
-    <div
-      className={TodoClassName}
-      key={id}
-    >
+    <div className={TodoClassName}>
       <div className="todo__description">
         <Typography
           variant="text-t1"

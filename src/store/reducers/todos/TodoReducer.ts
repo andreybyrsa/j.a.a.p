@@ -9,6 +9,9 @@ const todosSlice = createSlice({
     setTodos(state, action: PayloadAction<Todo[]>) {
       state.todos = action.payload
     },
+    removeTodos(state) {
+      state.todos = []
+    },
     setTodo(state, action: PayloadAction<Todo>) {
       state.todos.push(action.payload)
     },
@@ -18,6 +21,6 @@ const todosSlice = createSlice({
   }
 });
 
-export const { setTodos, setTodo, removeTodo } = todosSlice.actions;
+export const { setTodos, setTodo, removeTodo, removeTodos } = todosSlice.actions;
 
 export default todosSlice.reducer;
