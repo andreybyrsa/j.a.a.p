@@ -9,8 +9,10 @@ import UserLoaderProps from './UserLoader.types';
 function UserLoader({
   user,
 }: UserLoaderProps) {
-  const [userName, setUserName] = useState<string>('');
+  const [greetings, setGreetings] = useState<string>('');
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
+
+  const Greetings = `Welcome ${user}!`;
 
   const [redirect, setRedirect] = useState(false);
 
@@ -19,17 +21,16 @@ function UserLoader({
       setCurrentIndex(0);
       return;
     }
-    if (userName !== user && currentIndex < user.length) {
+    if (greetings !== Greetings && currentIndex < Greetings.length) {
       setTimeout(() => {
-        setUserName(prevState => prevState + user[currentIndex]);
+        setGreetings(prevState => prevState + Greetings[currentIndex]);
         setCurrentIndex(prevState => prevState + 1);
       }, 120);
     }
-    if (userName === user) {
-      setUserName(prevState => prevState + '!');
+    if (greetings === Greetings) {
       setTimeout(() => setRedirect(true), 1000);
     }
-  }, [currentIndex, user, userName])
+  }, [Greetings, currentIndex, greetings])
 
   if (redirect) {
     return <Navigate to="/index" />
@@ -41,7 +42,7 @@ function UserLoader({
         variant="heading-h1"
         color="#6FBAF8"
       >
-        {"Welcome " + userName}
+        {greetings}
       </Typography>
     </PageLayout>
   );
