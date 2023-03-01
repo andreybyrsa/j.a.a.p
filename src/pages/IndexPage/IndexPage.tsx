@@ -10,7 +10,7 @@ import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../../store/reducers/user/UserReducer';
 import { setLoading } from '../../store/reducers/app/AppReducer';
-import { removeTodo, setTodo } from '../../store/reducers/todos/TodoReducer';
+import { removeTodo, removeTodos, setTodo } from '../../store/reducers/todos/TodoReducer';
 import useAuth from '../../hooks/useAuth';
 
 import './IndexPapge.scss';
@@ -24,7 +24,7 @@ function IndexPage() {
   const { id } = useAuth();
   const dispatch = useDispatch();
 
-  const onHandlerSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onHandlerSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
     const todo: TodoTypes = {
       id: todos.length > 0 ? Math.max(...todos.map(elem => elem.id)) + 1 : 1,
       text: value,
@@ -33,7 +33,7 @@ function IndexPage() {
     dispatch(setTodo(todo));
     event.preventDefault();
     setValue('');
-  }
+  }, [dispatch, todos, value]);
 
   const onHandlerRemoveTodo = (index: number) => {
     dispatch(removeTodo(index));
@@ -41,8 +41,28 @@ function IndexPage() {
 
   const onHandlerLogOut = useCallback(() => {
     dispatch(removeUser());
+    dispatch(removeTodos());
     dispatch(setLoading());
   }, [dispatch])
+
+  const header = useMemo(() => {
+    return (
+      <div className="index-page__header">
+        <Typography
+          variant="heading-h1"
+          color="#75E3B2"
+        >
+          Just An Amazing App
+        </Typography>
+        <Input
+          value={value}
+          setValue={setValue}
+          onSubmit={onHandlerSubmit}
+          placeholder="Text a new todo"
+        />
+      </div>
+    );
+  }, [onHandlerSubmit, value]);
 
   const footer = useMemo(() => {
     return (
@@ -59,23 +79,12 @@ function IndexPage() {
   return (
     <PageLayout
       contentClassName="index-page"
+      header={header}
       footer={footer}
     >
-      <Typography
-        variant="heading-h1"
-        color="#75E3B2"
-      >
-        Just An Amazing App
-      </Typography>
-      <Input
-        value={value}
-        setValue={setValue}
-        onSubmit={onHandlerSubmit}
-        placeholder="Text a new todo"
-      />
-      {todos ? todos.map((elem: TodoTypes) => (
+      {todos.length ? todos.map((elem: TodoTypes) => (
         <Todo
-          id={elem.id}
+          key={elem.id}
           value={elem.text}
           date={elem.date}
           onClick={() => onHandlerRemoveTodo(elem.id)}
