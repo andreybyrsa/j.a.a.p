@@ -10,7 +10,7 @@ import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../../store/reducers/user/UserReducer';
 import { setLoading } from '../../store/reducers/app/AppReducer';
-import { removeTodo, removeTodos, setTodo } from '../../store/reducers/todos/TodoReducer';
+import { removeTodo, removeTodos, setIsDoneTodo, setTodo } from '../../store/reducers/todos/TodoReducer';
 import useAuth from '../../hooks/useAuth';
 
 import './IndexPapge.scss';
@@ -28,6 +28,7 @@ function IndexPage() {
     const todo: TodoTypes = {
       id: todos.length > 0 ? Math.max(...todos.map(elem => elem.id)) + 1 : 1,
       text: value,
+      isDone: false,
       date: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} ${new Date().toString().split(' ')[4].split(':').filter((elem, index) => index < 2).join(':')}`,
     }
     dispatch(setTodo(todo));
@@ -36,7 +37,8 @@ function IndexPage() {
   }, [dispatch, todos, value]);
 
   const onHandlerRemoveTodo = (index: number) => {
-    dispatch(removeTodo(index));
+    dispatch(setIsDoneTodo(index));
+    setTimeout(() => dispatch(removeTodo(index)), 400);
   }
 
   const onHandlerLogOut = useCallback(() => {
@@ -87,6 +89,7 @@ function IndexPage() {
           key={elem.id}
           value={elem.text}
           date={elem.date}
+          isDone={elem.isDone}
           onClick={() => onHandlerRemoveTodo(elem.id)}
         />
       )) : (

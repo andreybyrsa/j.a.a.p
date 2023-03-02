@@ -10,11 +10,15 @@ function Todo({
 
   value,
   date,
+  isDone,
 
   onClick,
 }: TodoProps) {
   const TodoClassName = classNames(
     'todo',
+    {
+      'todo--is-done': isDone,
+    },
     className,
   );
 

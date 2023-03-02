@@ -17,10 +17,16 @@ const todosSlice = createSlice({
     },
     removeTodo(state, action: PayloadAction<number>) {
       state.todos = state.todos.filter((elem) => elem.id !== action.payload)
+    },
+    setIsDoneTodo(state, action: PayloadAction<number>) {
+      const currentTodo: Todo | undefined = state.todos.find((elem) => elem.id === action.payload);
+      if (currentTodo) {
+        currentTodo.isDone = true;
+      }
     }
   }
 });
 
-export const { setTodos, setTodo, removeTodo, removeTodos } = todosSlice.actions;
+export const { setTodos, setTodo, removeTodo, removeTodos, setIsDoneTodo } = todosSlice.actions;
 
 export default todosSlice.reducer;

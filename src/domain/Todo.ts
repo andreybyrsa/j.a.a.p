@@ -2,7 +2,7 @@ interface Todo {
   id: number
   text: string
   date: string
-  isDone?: boolean
+  isDone: boolean
 }
 
 export default Todo;
