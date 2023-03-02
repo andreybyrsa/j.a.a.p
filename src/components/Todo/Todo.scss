@@ -21,4 +21,15 @@
     @include fixedWidth(48px);
     @include fixedHeight(48px);
   }
+
+  &--is-done {
+    position: relative;
+
+    animation: isDone .4s ease-out forwards;
+  }
+
+  @keyframes isDone {
+    from {left: 0}
+    to {left: -110%}
+  }
 }
