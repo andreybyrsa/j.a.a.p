@@ -25,7 +25,7 @@ function UserLoader({
       setTimeout(() => {
         setGreetings(prevState => prevState + Greetings[currentIndex]);
         setCurrentIndex(prevState => prevState + 1);
-      }, 120);
+      }, 80);
     }
     if (greetings === Greetings) {
       setTimeout(() => setRedirect(true), 1000);

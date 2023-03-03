@@ -39,7 +39,6 @@ function LoginPage() {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({user}) => {
-        console.log(user.uid);
         const dbRef = ref(getDatabase());
         get(child(dbRef, `user${user.uid}/userName`)).then((data) => {
           dispatch(setUser({

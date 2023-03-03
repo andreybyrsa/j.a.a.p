@@ -77,7 +77,7 @@ function RegisterPage() {
         setValue={setPassword}
         placeholder="Password"
       />
-      <Button onClick={onHandlerRegister}>Sing up</Button>
+      <Button onClick={onHandlerRegister}>Sign up</Button>
       <div className="register-page__redirection">
         <Typography
           variant="text-t2"
